@@ -1,0 +1,52 @@
+{% extends 'blog/base.html' %}
+{% block title %} Index {% endblock %}
+{% block content %}
+    {% for message in messages %}
+        {% if 'error' in message.tags %}
+        <p class="error bg">{{ message }}<p>
+        {% endif %}
+        {% if 'success' in message.tags %}
+        <p class="success bg">{{ message }}<p>
+        {% endif %}
+    {% endfor %}
+
+    <table class="blog-table">
+        <thead>
+            <tr>
+                <th>S.No.</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Published</th>
+                <th>Author</th>
+                <th>Link</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if posts %}
+            {% for post in posts %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.description }}</td>
+                <td>{{ post.published }}</td>
+                <td>{{ post.author }}</td>
+                <td><a href="{{ post.link }}" target="_blank">click</a></td>
+                <td>
+                    <a href="{% url 'add-comment' post.id %}">Blogs</a>
+                    <a href="{% url 'view-blog' post.id %}">View</a>
+                    <a href="{% url 'edit-blog' post.id %}">Edit</a>
+                    <a href="{% url 'confirm-blog' post.id %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="7">
+                    No Blog Exist.
+                </td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}    

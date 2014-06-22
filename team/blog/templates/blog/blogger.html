@@ -1,0 +1,41 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+<div>
+    <h1>
+        <label class ="info"> {{post.title}} </label>
+        <label class = "info"> {{ post.published }}</label>
+    </h1>
+    <p>
+        <label class ="info"> {{post.auther}}</label>
+    </p>
+    <fieldset>
+        <label class ="info"> {{post.content}}</label>
+        <label class ="info"> {{post.description}}</label>
+    </fieldset>
+    <p>
+        
+        <label class="info"><a href="{{ post.link }}" target="_blank">click</a></label>
+    </p>
+
+    
+</div>
+
+<div>
+    <h1> Add Comment</h1>
+        <form action="{% url 'add-comment' post.id %}" method="post">
+         {% csrf_token %}
+            {% for f in form %}
+            <p>
+                <label class="label">{{ f.label }}</label>
+                {{ f }}
+                <label class="error">{{ f.errors.as_text }}</label>
+            </p>
+            {% endfor %}
+        <p>
+       <input type="submit" value="Submit"/>
+        </p>
+        </form>
+</div>
+
+{% endblock %}

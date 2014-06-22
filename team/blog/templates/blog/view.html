@@ -1,0 +1,44 @@
+{% extends 'blog/base.html' %}
+{% block title %} {{post.tile}}{% endblock %}
+{%block content%}
+    <div>
+        <p>
+            <label class="label">Title: </label>
+            <label class="info">{{ post.title }}</label>
+        </p>
+        <p>
+            <label class="label">Description: </label>
+            <label class="info">{{ post.description }}</label>
+        </p>
+        <p>
+            <label class="label">Content: </label>
+            <label class="info">{{ post.content }}</label>
+        </p>
+        <p>
+            <label class="label">Slug: </label>
+            <label class="info">{% if post.slug %} On {% else %} Off {% endif %}</label>
+        </p>
+        <p>
+            <label class="label">published: </label>
+            <label class="info">{{ post.published }}</label>
+        </p>
+        <p>
+            <label class="label">Author: </label>
+            <label class="info">{{ post.author }}</label>
+        </p>
+        <p>
+            <label class="label">Link: </label>
+            <label class="info"><a href="{{ post.link }}" target="_blank">click</a></label>
+        </p>
+        <p>
+            <label class="label">Link Description: </label>
+            <label class="info">{{ post.link_description }}</label>
+        </p>
+        <p>
+            <a class="button" href="{% url 'edit-blog' post.id %}">Edit</a>
+            <a class="button" href="{% url 'confirm-blog' post.id %}">Delete</a>
+            <a class="button" href="{% url 'home' %}">Back</a>
+        </p>
+
+    </div>
+{%endblock%}            

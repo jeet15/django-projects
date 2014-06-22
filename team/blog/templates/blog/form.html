@@ -1,0 +1,33 @@
+{% extends 'blog/base.html' %}
+{% block title %} Add Blog {% endblock %}
+{% block content %}
+	<fieldset>
+		<legend>{{ action_title }}</legend>
+        {% for message in messages %}
+            {% if 'error' in message.tags %}
+            <p class="error bg">{{ message }}<p>
+            {% endif %}
+            {% if 'success' in message.tags %}
+            <p class="success bg">{{ message }}<p>
+            {% endif %}
+        {% endfor %}
+		<form method="post" action="{% url 'add-blog' %}">
+		    {% csrf_token %}
+            {# Include the hidden fields #}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            {# Include the visiable fields #}
+    		{% for f in form.visible_fields %}
+    		<p>
+    			<label class="label">{{ f.label }}</label>
+    			{{ f }}
+    			<label class="error">{{ f.errors.as_text }}</label>
+    		</p>
+    		{% endfor %}
+    		<p>
+    			<input type="submit" value="Submit"/>
+    		</p>
+    	</form>
+	</fieldset>
+{% endblock %}    
