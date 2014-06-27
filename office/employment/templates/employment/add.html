@@ -1,0 +1,37 @@
+{% extends 'employment/base.html' %}
+{%  block title %} Add New Employer {% endblock %}
+{% block content %}
+	<fieldset>
+		<legend>{{action_title}}</legend>
+		{% for mess in messages %}
+			{%  if 'error' in mess.tags %}
+			<p class="error bg" >{{mess}}</p>
+			{% endif %}
+			{% if 'success' in mess.tags %}
+			<p class="success bg">{{mess}}</p>
+			{% endif %}
+		{% endfor %}	
+		<form method="post" action="{% url 'add-employer' %}">
+		{% csrf_token %}
+		{# Include the hidden fiels#}
+		{% for hidden in form.hidden_fields %}
+			{{hidden}}
+		{% endfor %}	
+		{# Include the visible fields #}
+		{% for f in form.visible_fields %}
+		<p>
+			<label class="label">{{f.label}}</label>
+			{{f}}
+			<label class="error">{{f.error.as_text}}</label>
+		</p>
+		{% endfor %}
+		<p>
+			<input type="submit" value="Submit"/>
+		</p>
+		<p>
+            <a class="button" href="{% url 'add-education' post.id %}">Add Ecuation</a>
+            </p>
+		</form>
+	</fieldset> 
+
+{% endblock %}

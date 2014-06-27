@@ -1,0 +1,52 @@
+{% extends 'employment/base.html' %}
+{% block title %} Index {% endblock %}
+{% block content %}
+	{% for mess in messages %}
+		{% if 'error' in mess.tags %}
+		<p class="error bg">{{ mess }}</p>
+		{% endif %}
+		{% if 'success' in mess.tags %}
+		<p class="success bg">{{mess}}</p>
+		{% endif %}
+	{% endfor %}	
+
+	<table class="emp-table">
+		<thead>
+			<tr>
+				<th>First Name</th>
+				<th>Middle Name</th>
+				<th>Last Name</th>
+				<th>City</th>
+				<th>State</th>
+				<th>Country</th>
+				<th>Email</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% if emp %}
+			{% for employe in emp%}
+			<tr>
+				<td>{{employe.fname}}</td>
+				<td>{{employe.mname}}</td>
+				<td>{{employe.lname}}</td>
+				<td>{{employe.city}}</td>
+				<td>{{employe.state}}</td>
+				<td>{{employe.country}}</td>
+				<td>{{employe.email}}</td>
+				<td>
+					<a href="{% url 'add-employer' %}"> View </a>
+					
+				</td>
+			</tr>
+			{% endfor %}
+			{% else %}
+			<tr>
+				<td colspan="8">
+					No Blog Exit...
+				</td>
+			</tr>
+			{% endif %}
+		</tbody>
+	</table>
+{% endblock %}	

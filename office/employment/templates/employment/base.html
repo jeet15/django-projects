@@ -1,0 +1,139 @@
+<!DOCTYPE <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content_Type" content="text/html"; charset=UTF.8>
+	<title> {% block title%}{%endblock%}</title>
+	<style type="text/css">
+	body {
+		margin: 0;
+		padding: 0px;
+		font-size: 12px;
+	}
+	.label{
+		display: inline-block;
+		width: 100px;
+		font-weight: bold;
+	}
+	.error{
+		color: red;
+
+	}
+	.success{
+		color: green;
+	}
+	.bg{
+		font-weight: bold;
+		font-size: 15px;
+	}
+
+	header{
+		overflow: hidden;
+		padding: 10px;
+		display: block;
+		background: #FAFAFA;
+		border-bottom: 1px solid #EEE;
+	}
+
+	header .head-text {
+		float: left;
+		font-size: 30px;
+		font-weight: bold;
+		color: #444;
+	}
+
+	nav {
+		overflow: hidden;
+		float: right;
+		padding: 1px;
+	}
+
+	nav a {
+		display: inline-block;
+		margin-left: -1px;
+		padding: 5px;
+		background: #EEE;
+		color: #666;
+		border: 1px solid #AAA;
+		text-decoration: none;
+		min-width: 70px;
+		text-align: center;
+		float: left;
+	}
+
+	table.emp-table {
+		border-collapse: collapse;
+		border-spacing: 0px;
+		width: 80%;
+		font-size: 18px;
+
+	}
+
+	table.emp-table th {
+		background: #EEE;
+		padding: 5px;
+		border: 1px solid #CCC;
+	}
+
+	table.emp-table td {
+		text-align: center;
+		padding: 5px;
+		border: 1px solid #CCC;
+	}
+
+	table.emp-table ttr:nth-child(even) td {
+		background: #FAFAFA;
+	}
+	article {
+		display: block;
+		min-height: 600px
+	}
+	footer {
+		display: block;
+		background: #444;
+		color: #FAFAFA;
+		padding: 10px;
+	}
+	footer p {
+		text-align: center;
+	}
+	fieldset {
+		border: 1px solid #CCC;
+		background: #FBFBFB;
+	}
+	legend {
+		font-weight: bold;
+	}
+	.content {
+		padding: 10px;
+	}
+	.button {
+		display: inline-block;
+		padding: 5px 10px;
+		text-decoration: none;
+		border: 1px solid #AAA;
+		background: #EAEAEA;
+		color: #444;
+	}
+	.button:hover {
+		background: #DADADA;
+		border: 1px solid #999;
+	}
+	</style>
+</head>
+<body>
+	<header>
+		<label class="head-text">Employment System </label>
+		<nav>
+			<a href="{%url 'home'%}"> HOME </a>
+			<a href="{%url 'add-employer' %}"> ADD NEW</a>
+		</nav>
+	</header>
+	<article>
+		<div class="content">{% block content %} {% endblock %}</div>
+	</article>
+	<footer>
+		<p>&copy; eTRON 2014 </p>
+	</footer>
+
+</body>
+</html>>
