@@ -1,0 +1,56 @@
+{% extends 'employment/base.html' %}
+{% block title %}  Edit {% endblock %}
+{% block content %}
+	<div>
+		<blockquote>
+		<fieldset>
+		<legend>Employer Name</legend>
+		<p>
+			<label class="info">{{emp.fname}}</label>
+			<label class="info">{{emp.mname}}</label>
+			<label class="info">{{emp.lname|safe}}</label>
+		</p>
+		</fieldset>
+
+		<fieldset>
+		<legend>Address</legend>
+		<p>
+			<label class="label">City:</label>
+			<label class="info">{{emp.city}}</label>
+		</p>
+		<p>	
+			<label class="label">State:</label>
+			<label class="info">{{emp.state}}</label>
+		</p>
+		<p>	
+			<label class="label">Country:</label>
+			<label class="info">{{emp.country}}</label>
+		</p>
+		<p>	
+			<label class="label">Pincode:</label>
+			<label class="info">{{emp.pincode}}</label>
+
+		</p>
+		</fieldset>
+
+		<fieldset>
+		
+			<legend>Contact Information</legend>
+		<p>		
+			<label class="label">Email:</label>
+			<label class="info">{{emp.email}}</label>
+		</p>
+		<p>	
+			<label class="label">Mobile No:</label>
+			<label class="info">{{emp.mobile}}</label>
+		</p>
+		</fieldset>
+
+		<p>
+			<a href="{% url 'edit-employer' emp.id %}">Edit</a>
+			<a href="{% url 'home'%}">Back</a>
+		</p>
+		</blockquote>
+	</div>
+
+{% endblock %}

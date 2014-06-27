@@ -35,7 +35,8 @@
 				<td>{{employe.country}}</td>
 				<td>{{employe.email}}</td>
 				<td>
-					<a href="{% url 'add-employer' %}"> View </a>
+					<a href="{% url 'view-employer' employe.id %}"> View </a>
+					<a href="{% url 'edit-employer' employe.id %}"> edit </a>
 					
 				</td>
 			</tr>

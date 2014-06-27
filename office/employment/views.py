@@ -19,7 +19,40 @@ def add_employer(request):
 	else:
 		form = EmployerForm()
 	return render(request, 'employment/more.html', {'form':form, 'action_title': 'Add Employer'})	
-			
+
+def view_employer(request, id):
+	emp = Employer.objects.filter(id=id)
+	if emp:
+		emp = emp[0]
+		return render (request, 'employment/view.html', {'emp':emp})
+	else:
+		messages.error(request, 'Selected Employer doesn,t exit')
+		return redirect('home')
+
+def edit_employer(request, id):
+	emp = Employer.objects.filter(id = id)
+	if emp:
+		emp = emp[0]
+		form = EmployerForm({
+			'fname':emp.fname,
+			'mname':emp.mname,
+			'lname':emp.lname,
+			'city':emp.city,
+			'state':emp.state,
+			'country':emp.country,
+			'pincode':emp.pincode,
+			'email':emp.email,
+			'mobile':emp.mobile
+
+			})
+		return render(request, 'employment/add.html',{'form':form, 'action_title':'Update Employer Details'})
+	else:
+		messages.error(request, 'Selected Employer doesn,t exit')
+		return redirect('home')
+		
+
+
+
 def add_education(request, id):
 	emp = Employer.objects.all()
 	if emp:

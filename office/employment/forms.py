@@ -15,6 +15,22 @@ class EmployerForm(forms.Form):
 
 	def save(self):
 		data=self.cleaned_data
+		#for udpate
+		if data['id']:
+			emp = Employer.objects.filter(id = data['id'])
+			if emp:
+				emp = emp[0]
+				emp.fname = data['fname']
+				emp.mname = data['mname']
+				emp.lname = data['lname']
+				emp.city = data['city']
+				emp.state = data['state']
+				emp.country = data['country']
+				emp.pincode = data['pincode']
+				emp.email = data['email']
+				emp.mobile = data['mobile']
+				emp.save()
+		#For direct save
 		emp = Employer(fname=data['fname'], mname=data['mname'], lname=data['lname'], city=data['city'], state=data['state'],
 			country=data['country'], pincode=data['pincode'], email=data['email'], mobile=data['mobile'])
 		emp.save()

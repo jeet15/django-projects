@@ -11,7 +11,7 @@
 			<p class="success bg">{{mess}}</p>
 			{% endif %}
 		{% endfor %}	
-		<form method="post" action="{% url 'add-education' post.id %}">
+		<form method="post" action="{% url 'add-education' emp.id %}">
 		{% csrf_token %}
 		{# Include the hidden fiels#}
 		{% for hidden in form.hidden_fields %}
