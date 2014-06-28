@@ -10,15 +10,19 @@ def home(request):
 def add_employer(request):
 	if 'POST' == request.method:
 		form = EmployerForm(request.POST)
+		edu = EducationForm(request.POST)
 		if form.is_valid():
-			form.save()
+			if edu.is_valid():
+				form.save()
+				edu.save(id=id)
 			messages.success(request, 'Details Inserted Successfully')
 			return redirect('home')
 		else:
 			messages.error(request, 'submitted text is invalid')
 	else:
 		form = EmployerForm()
-	return render(request, 'employment/more.html', {'form':form, 'action_title': 'Add Employer'})	
+		edu = EducationForm()
+	return render(request, 'employment/add.html', {'form':form,'edu':edu, 'action_title': 'Add Employer'})	
 
 def view_employer(request, id):
 	emp = Employer.objects.filter(id=id)
@@ -66,6 +70,19 @@ def add_education(request, id):
 		return render(request, 'employment/more.html', {'form':form, 'action_title': 'Add Education', 'emp':emp})	
 					
 	
+def del_profile(request, id):
+	remove = Employer.objects.filter(id=id)
+	if remove:
+		remove.delete()
+		messages.success(request, 'Profile deleted Successfully......')
+	else:
+		messages.error(request,'Selected profile doesn,t exit')
+	return redirect('home')	
+def confirm_delete(request,id):
+	remove = Employer.objects.filter(id=id)
+	if remove:
+		remove = remove[0]
+	return render(request,'employment/delete.html', {'remove':remove})	
 
 
 # Create your views here.

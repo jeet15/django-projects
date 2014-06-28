@@ -1,8 +1,9 @@
 {% extends 'employment/base.html' %}
 {%  block title %} Add New Employer {% endblock %}
 {% block content %}
+<blockquote>
 	<fieldset>
-		<legend>{{action_title}}</legend>
+		<legend>Add Employee </legend>
 		{% for mess in messages %}
 			{%  if 'error' in mess.tags %}
 			<p class="error bg" >{{mess}}</p>
@@ -25,6 +26,19 @@
 			<label class="error">{{f.error.as_text}}</label>
 		</p>
 		{% endfor %}
+		</fieldset>
+		<fieldset>
+		<legend>Education Details </legend>
+		{% for hidden in edu.hidden_fields %}
+			{{hidden}}
+		{% endfor %}	
+		{% for f in edu.visible_fields %}
+		<p>
+			<label class="label">{{f.label}}</label>
+			{{f}}
+			<label class="error">{{f.error.as_text}}</label>
+		</p>  
+		{% endfor %}
 		<p>
 			<input type="submit" value="Submit"/>
 		</p>
@@ -33,5 +47,6 @@
             </p>
 		</form>
 	</fieldset> 
+	</blockquote>
 
 {% endblock %}

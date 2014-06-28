@@ -38,9 +38,9 @@ class EmployerForm(forms.Form):
 
 
 class EducationForm(forms.Form):
-	higher_specification = forms.CharField(label ="Specification", max_length=20)
+	higher_specification = forms.CharField(label ="Higher Specification", max_length=20)
 	higher_year = forms.CharField(label ="Passing Year", max_length = 10)
-	secondary_specification = forms.CharField(label ="Specification", max_length=20)
+	secondary_specification = forms.CharField(label ="Secondary Specification", max_length=20)
 	secondary_year = forms.CharField(label ="Passing Year",  max_length = 10)
 	graduation = forms.CharField(label ="Graduation", max_length=20)
 	year = forms.CharField(label ="Passing Year",  max_length = 10)

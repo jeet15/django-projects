@@ -1,0 +1,11 @@
+{%  block title %}  {%endblock%}
+{% block content %}
+<form>
+<blockquote>
+<h1> Confirmation </h1>
+	<p> Are You Sure you want to delete the Employer Details.......</p>
+	<a href="{% url 'del-profile' remove.id %}"> Confirm </a>
+	<a href="javascript:window.history.back(),"> Back </a>
+</blockquote>
+</form>
+{% endblock%}
