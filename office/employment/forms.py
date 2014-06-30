@@ -58,7 +58,7 @@ class EducationForm(forms.Form):
 				year = data['year'], university = data['university'])
 			edu.save()
 		elif action == 'update':
-			if data['id']:
+			if data['emp_id']:
 				edu=Education.objects.filter(id=data['emp_id'])
 				if edu:
 					edu = edu[0]

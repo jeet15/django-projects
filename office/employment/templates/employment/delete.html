@@ -5,7 +5,7 @@
 <h1> Confirmation </h1>
 	<p> Are You Sure you want to delete the Employer Details.......</p>
 	<a href="{% url 'del-profile' remove.id %}"> Confirm </a>
-	<a href="javascript:window.history.back(),"> Back </a>
+	<a href="{% url 'home' %}"> Back </a>
 </blockquote>
 </form>
 {% endblock%}

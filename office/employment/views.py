@@ -24,25 +24,6 @@ def add_employer(request):
 		edu = EducationForm()
 	return render(request, 'employment/add.html', {'form':form,'edu':edu, 'action_title': 'Add Employer'})	
 
- 
-
-def update_employer(request):
-	if 'POST' == request.method:
-		form = EmployerForm(request.POST)
-		edu = EducationForm(request.POST)
-		if form.is_valid() and edu.is_valid():
-			employer = form.save()
-			if employer:
-				edu.save(employer,'update')
-				messages.success(request,'Data Updated Successfully')
-				return redirect('home')
-			else:
-				messages.error(request,'Data is invalid')	
-		else:
-			form = EmployerForm()
-			edu = EducationForm()
-
-		return render(request, 'employment/add.html', {'form':form, 'edu':edu , 'action_title': 'Update Data'})	
 
 def view_employer(request, id):
 	emp = Employer.objects.filter(id=id)
