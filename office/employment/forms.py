@@ -30,11 +30,14 @@ class EmployerForm(forms.Form):
 				emp.email = data['email']
 				emp.mobile = data['mobile']
 				emp.save()
-		#For direct save
-		emp = Employer(fname=data['fname'], mname=data['mname'], lname=data['lname'], city=data['city'], state=data['state'],
-			country=data['country'], pincode=data['pincode'], email=data['email'], mobile=data['mobile'])
-		emp.save()
-		return True
+				return emp
+					
+		else:
+			#For direct save
+			emp = Employer(fname=data['fname'], mname=data['mname'], lname=data['lname'], city=data['city'], state=data['state'],
+				country=data['country'], pincode=data['pincode'], email=data['email'], mobile=data['mobile'])
+			emp.save()
+			return emp
 
 
 class EducationForm(forms.Form):
@@ -46,11 +49,25 @@ class EducationForm(forms.Form):
 	year = forms.CharField(label ="Passing Year",  max_length = 10)
 	university = forms.CharField(label ="University", max_length=50)
 
-	def save(self):
+	def save(self, employer, action):
 		data=self.cleaned_data
-		edu = Education(higher_specification = data['higher_specification'],
-			higher_year = data['higher_year'] ,secondary_specification = data['secondary_specification'], 
-			secondary_year = data['secondary_year'], graduation = data['graduation'],
-			year = data['year'], university = data['university'])
-		edu.save()
-		return True
+		if action == 'add':
+			edu = Education(employer = employer, higher_specification = data['higher_specification'],
+				higher_year = data['higher_year'] ,secondary_specification = data['secondary_specification'], 
+				secondary_year = data['secondary_year'], graduation = data['graduation'],
+				year = data['year'], university = data['university'])
+			edu.save()
+		elif action == 'update':
+			if data['id']:
+				edu.Education.objects.filter(id = data['id'])
+				if edu:
+					edu = edu[0]
+					edu.higher_specification = data['higher_specification']
+					edu.higher_year = data['higher_year']
+					edu.secondary_specification = data['secondary_specification']
+					edu.secondary_year = data['secondary_year']
+					edu.graduation = data['graduation']
+					edu.year = data['year']
+					edu.university = data['university']
+					edu.save()
+				return True

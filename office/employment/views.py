@@ -11,10 +11,10 @@ def add_employer(request):
 	if 'POST' == request.method:
 		form = EmployerForm(request.POST)
 		edu = EducationForm(request.POST)
-		if form.is_valid():
-			if edu.is_valid():
-				form.save()
-				edu.save(id=id)
+		if form.is_valid()  and edu.is_valid():
+			employer = form.save()
+			if employer:
+				edu.save(employer, 'add')
 			messages.success(request, 'Details Inserted Successfully')
 			return redirect('home')
 		else:
@@ -24,11 +24,34 @@ def add_employer(request):
 		edu = EducationForm()
 	return render(request, 'employment/add.html', {'form':form,'edu':edu, 'action_title': 'Add Employer'})	
 
+ 
+
+def update_employer(request):
+	if 'POST' == request.method:
+		form = EmployerForm(request.POST)
+		edu = EducationForm(request.POST)
+		if form.is_valid() and edu.is_valid():
+			employer = form.save()
+			if employer:
+				edu.save(employer,'update')
+				messages.success(request,'Data Updated Successfully')
+				return redirect('home')
+			else:
+				messages.error(request,'Data is invalid')	
+		else:
+			form = EmployerForm()
+			edu = EducationForm()
+
+		return render(request, 'employment/add.html', {'form':form, 'edu':edu , 'action_title': 'Update Data'})	
+
 def view_employer(request, id):
 	emp = Employer.objects.filter(id=id)
 	if emp:
 		emp = emp[0]
-		return render (request, 'employment/view.html', {'emp':emp})
+		edu = Education.objects.filter(employer = emp)
+		if edu:
+			edu = edu[0]
+		return render (request, 'employment/view.html', {'emp':emp, 'edu': edu})
 	else:
 		messages.error(request, 'Selected Employer doesn,t exit')
 		return redirect('home')
@@ -49,7 +72,19 @@ def edit_employer(request, id):
 			'mobile':emp.mobile
 
 			})
-		return render(request, 'employment/add.html',{'form':form, 'action_title':'Update Employer Details'})
+		edu = Education.objects.filter(employer=emp)
+		if edu:
+			edu = edu[0]
+			form1 = EducationForm({
+				'higher_specification':edu.higher_specification,
+				'higher_year':edu.higher_year,
+				'secondary_specification':edu.secondary_specification,
+				'secondary_year':edu.secondary_year,
+				'graduation':edu.graduation,
+				'year':edu.year,
+				'university':edu.university
+			})
+		return render(request, 'employment/add.html', {'form':form, 'edu':form1, 'action_title':'Update Employer Details'})
 	else:
 		messages.error(request, 'Selected Employer doesn,t exit')
 		return redirect('home')
@@ -57,18 +92,7 @@ def edit_employer(request, id):
 
 
 
-def add_education(request, id):
-	emp = Employer.objects.all()
-	if emp:
-		emp = emp[0]
-		if 'POST' == request.method:
-			form = EducationForm(request.POST)
-			if form.is_valid():
-				form.save()
-		else:
-			form = EducationForm()
-		return render(request, 'employment/more.html', {'form':form, 'action_title': 'Add Education', 'emp':emp})	
-					
+
 	
 def del_profile(request, id):
 	remove = Employer.objects.filter(id=id)

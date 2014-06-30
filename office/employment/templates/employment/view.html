@@ -46,6 +46,36 @@
 		</p>
 		</fieldset>
 
+		<fieldset>
+			<legend>Education Details.....</legend>
+			<p>
+				<label class="label">Higher Specification:</label>
+				<label class="info" style="margin-right:40px;">{{edu.higher_specification}}</label>
+			
+			
+				<label class="label">Passing Year:</label>
+				<label class="info">{{edu.higher_year}}</label>
+			</p>
+			<p>
+				<label class="label">Secondary Specification</label>
+				<label class="info" style="margin-right:40px;">{{edu.secondary_specification}}</label>
+
+				<label class="label">Passing Year:</label>
+				<label class="info" >{{edu.secondary_year}}</label>
+			</p>
+			<p>
+				<label class="label">Graduation:</label>
+				<label class="info" style="margin-right:40px;">{{edu.graduation}}</label>
+				<label class="label">Passing Year:</label>
+				<label class="info" style="margin-right:40px;">{{edu.year}}</label>
+				<label class="label">University:</label>
+				<label class="info">{{edu.university}}</label>
+			</p>
+
+			
+
+		</fieldset>
+
 		<p>
 			<a href="{% url 'edit-employer' emp.id %}">Edit</a>
 			<a href="{% url 'home'%}">Back</a>
