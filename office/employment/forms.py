@@ -59,7 +59,7 @@ class EducationForm(forms.Form):
 			edu.save()
 		elif action == 'update':
 			if data['id']:
-				edu.Education.objects.filter(id = data['id'])
+				edu=Education.objects.filter(id=data['emp_id'])
 				if edu:
 					edu = edu[0]
 					edu.higher_specification = data['higher_specification']

@@ -61,6 +61,7 @@ def edit_employer(request, id):
 	if emp:
 		emp = emp[0]
 		form = EmployerForm({
+			'id':emp.id,
 			'fname':emp.fname,
 			'mname':emp.mname,
 			'lname':emp.lname,
@@ -76,6 +77,7 @@ def edit_employer(request, id):
 		if edu:
 			edu = edu[0]
 			form1 = EducationForm({
+				'edu_id':edu.id,
 				'higher_specification':edu.higher_specification,
 				'higher_year':edu.higher_year,
 				'secondary_specification':edu.secondary_specification,
