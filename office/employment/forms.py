@@ -41,6 +41,7 @@ class EmployerForm(forms.Form):
 
 
 class EducationForm(forms.Form):
+	edu_id = forms.CharField(required = False, widget = forms.HiddenInput())
 	higher_specification = forms.CharField(label ="Higher Specification", max_length=20)
 	higher_year = forms.CharField(label ="Passing Year", max_length = 10)
 	secondary_specification = forms.CharField(label ="Secondary Specification", max_length=20)
@@ -49,25 +50,24 @@ class EducationForm(forms.Form):
 	year = forms.CharField(label ="Passing Year",  max_length = 10)
 	university = forms.CharField(label ="University", max_length=50)
 
-	def save(self, employer, action):
+	def save(self, employer):
 		data=self.cleaned_data
-		if action == 'add':
+		if data['edu_id']:
+			edu=Education.objects.filter(id=data['edu_id'])
+			if edu:
+				edu = edu[0]
+				edu.higher_specification = data['higher_specification']
+				edu.higher_year = data['higher_year']
+				edu.secondary_specification = data['secondary_specification']
+				edu.secondary_year = data['secondary_year']
+				edu.graduation = data['graduation']
+				edu.year = data['year']
+				edu.university = data['university']
+				edu.save()
+		else:
 			edu = Education(employer = employer, higher_specification = data['higher_specification'],
 				higher_year = data['higher_year'] ,secondary_specification = data['secondary_specification'], 
 				secondary_year = data['secondary_year'], graduation = data['graduation'],
 				year = data['year'], university = data['university'])
 			edu.save()
-		elif action == 'update':
-			if data['emp_id']:
-				edu=Education.objects.filter(id=data['emp_id'])
-				if edu:
-					edu = edu[0]
-					edu.higher_specification = data['higher_specification']
-					edu.higher_year = data['higher_year']
-					edu.secondary_specification = data['secondary_specification']
-					edu.secondary_year = data['secondary_year']
-					edu.graduation = data['graduation']
-					edu.year = data['year']
-					edu.university = data['university']
-					edu.save()
-				return True
+		return True

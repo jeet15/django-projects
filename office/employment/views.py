@@ -14,7 +14,7 @@ def add_employer(request):
 		if form.is_valid()  and edu.is_valid():
 			employer = form.save()
 			if employer:
-				edu.save(employer, 'add')
+				edu.save(employer)
 			messages.success(request, 'Details Inserted Successfully')
 			return redirect('home')
 		else:
@@ -23,7 +23,6 @@ def add_employer(request):
 		form = EmployerForm()
 		edu = EducationForm()
 	return render(request, 'employment/add.html', {'form':form,'edu':edu, 'action_title': 'Add Employer'})	
-
 
 def view_employer(request, id):
 	emp = Employer.objects.filter(id=id)
@@ -71,12 +70,7 @@ def edit_employer(request, id):
 	else:
 		messages.error(request, 'Selected Employer doesn,t exit')
 		return redirect('home')
-		
 
-
-
-
-	
 def del_profile(request, id):
 	remove = Employer.objects.filter(id=id)
 	if remove:
